@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/img/css/style.css">
+</head>
+<body>
+    <div class="container">
+    <div class="mt-5">
+        <h1 class="mb-4">Upload Book</h1>
+        <form method="post" action="{% url 'upload_book' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name">Name:</label>
+                {{ form.name }}
+            </div>
+            <div class="form-group">
+                <label for="id_author">Author:</label>
+                {{ form.author }}
+            </div>
+            <div class="form-group">
+                <label for="id_description">Description:</label>
+                {{ form.description }}
+            </div>
+            <div class="form-group">
+                <label for="id_price">Quantity:</label>
+                {{ form.quantity }}
+            </div>
+            <div class="form-group">
+                <label for="id_price">Price:</label>
+                {{ form.price }}
+            </div>
+            <div class="form-group">
+                <label for="id_image">Image:</label>
+                {{ form.image }}
+            </div>
+            <div class="form-group">
+                <label for="id_file">File:</label>
+                {{ form.file }}
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+            <a href="{% url 'book_list' %}" class="btn btn-primary ml-2">Show Books</a>
+        </form>
+    </div>
+</div>
+</body>
+</html>

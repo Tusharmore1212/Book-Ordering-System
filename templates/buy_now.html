@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Now</title>
+    {% load static %}
+    <link rel="stylesheet" href="/static/img/css/buy.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Buy Book</h2>
+        <form action="/dobuybook/{{book.id}}/" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="cname">Customer Name</label>
+                <input type="text" id="customerName" name="customerName" required>
+            </div>
+            <div class="form-group">
+                <label for="cemail">Email</label>
+                <input type="email" id="customeremail" name="customeremail" required>
+            </div>
+            <div class="form-group">
+                <label for="cphone">Contact</label>
+                <input type="text" id="cphone" name="cphone" required>
+            </div>
+            <div class="form-group">
+                <label for="cadd">Address</label>
+                <input type="text" id="cadd" name="cadd" required>
+            </div>
+            <div class="form-group">
+                <label for="bname">Book Name</label>
+                <input type="text" id="bname" name="bname" value="{{book.name}}" required>
+            </div>
+            <div class="form-group">
+                <label for="bprice">Book Price</label>
+                <input type="text" id="bprice" name="bprice" value="{{book.price}}" required>
+            </div>
+            <div class="form-group">
+                <label for="qunt">Quantity</label>
+                <input type="qunt" id="quantity" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="totalprice">Total Price</label>
+                <input type="text" id="totalprice" name="totalprice" readonly>
+            </div>
+            <button type="submit">Buy</button>
+        </form>
+    </div>
+    <script>
+        function calculateTotalPrice() {
+            const price = {{book.price}}
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const totalPrice = price * quantity;
+            document.getElementById('totalprice').value = totalPrice.toFixed(2);
+        }
+
+        document.getElementById('quantity').addEventListener('input', calculateTotalPrice);
+
+        {% if error_message %}
+            alert("{{ error_message }}");
+        {% endif %}
+    </script>
+</body>
+</html>
